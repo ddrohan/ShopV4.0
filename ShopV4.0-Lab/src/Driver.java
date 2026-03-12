@@ -147,14 +147,22 @@ public class Driver{
         printProducts();
         if (store.numberOfProducts() > 0){
             //only ask the user to choose the product to delete if products exist
-            int indexToDelete = ScannerInput.readNextInt("Enter the index of the product to delete ==> ");
+            int indexToDelete = JScannerInput.readNextInt("Enter the index of the product to delete ==> ");
             //pass the index of the product to Store for deleting and check for success.
             Product productToDelete = store.deleteProduct(indexToDelete);
             if (productToDelete != null){
-                System.out.println("Delete Successful! Deleted product: " + productToDelete.getProductName());
+                JOptionPane.showMessageDialog(null,
+                        "Delete Successful! Deleted product: " + productToDelete.getProductName(),
+                        "Delete Message",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
             }
             else{
-                System.out.println("Delete NOT Successful");
+                JOptionPane.showMessageDialog(null,
+                        "Delete Not Successful!",
+                        "Delete Message",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
             }
         }
     }
