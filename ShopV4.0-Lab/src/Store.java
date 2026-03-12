@@ -157,4 +157,29 @@ public class Store {
         }
         return null;
     }
+
+    public Product findProduct(int index) {
+        if (isValidIndex(index)) {
+            return products.get(index);
+        }
+        return null;
+    }
+
+    public boolean updateProduct(int indexToUpdate, Product updateDetails) {
+        //find the product object by the index number
+        Product foundProduct = findProduct(indexToUpdate);
+
+        //if the product exists, use the details passed in the updateDetails parameter to
+        //update the found product in the ArrayList.
+        if (foundProduct != null) {
+            foundProduct.setProductName(updateDetails.getProductName());
+            foundProduct.setProductCode(updateDetails.getProductCode());
+            foundProduct.setUnitCost(updateDetails.getUnitCost());
+            foundProduct.setInCurrentProductLine(updateDetails.isInCurrentProductLine());
+            return true;
+        }
+
+        //if the product was not found, return false, indicating that the update was not successful
+        return false;
+    }
 }

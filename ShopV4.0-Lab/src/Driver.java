@@ -43,6 +43,7 @@ public class Driver{
             switch (option){
                 case 1 -> addProduct();
                 case 2 -> printProducts();
+                case 3 -> updateProduct();
                 case 4 -> deleteProduct();
                 case 5 -> printCurrentProducts();
                 case 6 -> printAverageProductPrice();
@@ -166,4 +167,51 @@ public class Driver{
             }
         }
     }
+
+    //ask the user to enter the index of the object to update, and assuming it's valid,
+    //gather the new product data from the user and update the selected product object.
+    private void updateProduct(){
+        printProducts();
+        if (store.numberOfProducts() > 0){
+            //only ask the user to choose the product to update if products exist
+            int indexToUpdate = JScannerInput.readNextInt("Enter the index of the product to update ==> ");
+            if (store.isValidIndex(indexToUpdate)){
+                String productName = JScannerInput.readNextLine("Enter the Product Name:  ");
+                int productCode = JScannerInput.readNextInt("Enter the Product Code:  ");
+                double unitCost = JScannerInput.readNextDouble("Enter the Unit Cost:  ");
+
+                //Ask the user to type in either a Y or an N.  This is then
+                //converted to either a True or a False (i.e. a boolean value).
+                char currentProduct = JScannerInput.readNextChar("Is this product in your current line (y/n): ");
+                boolean inCurrentProductLine = false;
+                if ((currentProduct == 'y') || (currentProduct == 'Y'))
+                    inCurrentProductLine = true;
+
+                //pass the index of the product and the new product details to Store for updating and check for success.
+                if (store.updateProduct(indexToUpdate, new Product(productName, productCode, unitCost, inCurrentProductLine))){
+                    JOptionPane.showMessageDialog(null,
+                            "Update Successful!",
+                            "Update Message",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,
+                            "Update Not Successful!",
+                            "Update Message",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null,
+                        "There are no products for this index number",
+                        "Update Message",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            }
+        }
+    }
+
+
 }
