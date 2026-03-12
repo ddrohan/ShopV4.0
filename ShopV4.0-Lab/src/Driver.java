@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 /*** This class runs the application and handles the Product I/O
  ** @author Mairead Meagher, Siobhan Drohan
  * @version 3.0
@@ -15,7 +17,7 @@ public class Driver{
     }
 
     private int mainMenu(){
-        int option = ScannerInput.readNextInt("""
+        int option = JScannerInput.readNextInt("""
                Shop Menu
                ---------
                   1) Add a product
@@ -47,7 +49,7 @@ public class Driver{
             }
 
             //pause the program so that the user can read what we just printed to the terminal window
-            ScannerInput.readNextLine("\nPress enter key to continue...");
+            //ScannerInput.readNextLine("\nPress enter key to continue...");
 
             //display the main menu again
             option = mainMenu();
@@ -61,13 +63,13 @@ public class Driver{
     //gather the product data from the user and create a new product object - add it to the collection.
     private void addProduct(){
 
-        String productName = ScannerInput.readNextLine("Enter the Product Name:  ");
-        int productCode = ScannerInput.readNextInt("Enter the Product Code:  ");
-        double unitCost = ScannerInput.readNextDouble("Enter the Unit Cost:  ");
+        String productName = JScannerInput.readNextLine("Enter the Product Name:  ");
+        int productCode = JScannerInput.readNextInt("Enter the Product Code:  ");
+        double unitCost = JScannerInput.readNextDouble("Enter the Unit Cost:  ");
 
         //Ask the user to type in either a Y or an N.  This is then
         //converted to either a True or a False (i.e. a boolean value).
-        char currentProduct = ScannerInput.readNextChar("Is this product in your current line (y/n): ");
+        char currentProduct = JScannerInput.readNextChar("Is this product in your current line (y/n): ");
         boolean inCurrentProductLine = false;
         if ((currentProduct == 'y') || (currentProduct == 'Y'))
             inCurrentProductLine = true;
@@ -83,24 +85,37 @@ public class Driver{
 
     //print the products stored in the collection
     private void printProducts(){
-        System.out.println("List of Products are:");
-        System.out.println(store.listProducts());
+        //System.out.println("List of Products are:");
+        JOptionPane.showMessageDialog(null,
+                store.listProducts(),
+                "List of Products",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     //print out a list of all current products i.e. that are in the current product line.
     private void printCurrentProducts(){
-        System.out.println("List of CURRENT Products are:");
-        System.out.println(store.listCurrentProducts());
+            JOptionPane.showMessageDialog(null,
+                    store.listCurrentProducts(),
+                    "List of CURRENT Products",
+                    JOptionPane.INFORMATION_MESSAGE);
     }
 
     //print out the average product price for all products stored in the array
     private void printAverageProductPrice(){
         double averagePrice = store.averageProductPrice();
         if (averagePrice != -1){
-            System.out.println("The average product price is: " + averagePrice);
+            JOptionPane.showMessageDialog(null,
+                    averagePrice,
+                    "Product Details",
+                    JOptionPane.INFORMATION_MESSAGE);
+
         }
         else{
             System.out.println("There are no products in the store.");
+            JOptionPane.showMessageDialog(null,
+                    "There are no products in the store.",
+                    "Products",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
