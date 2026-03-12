@@ -31,7 +31,7 @@ public class Driver{
                   8) List products that are more expensive than a given price
                   ----------------------------
                   0) Exit
-               ==>>  """);
+               ==>>""");
         return option;
     }
 
@@ -83,10 +83,16 @@ public class Driver{
 
         boolean isAdded = store.add(new Product(productName, productCode, unitCost, inCurrentProductLine));
         if (isAdded){
-            System.out.println("Product Added Successfully");
+            JOptionPane.showMessageDialog(null,
+                    "Product Added Successfully",
+                    "Add Products",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
         else{
-            System.out.println("No Product Added");
+            JOptionPane.showMessageDialog(null,
+                    "Product Not Added",
+                    "Add Products",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
