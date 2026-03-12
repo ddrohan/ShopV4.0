@@ -139,4 +139,22 @@ public class Store {
         }
     }
 
+    public ArrayList<Product> getProducts(){
+        return products;
+    }
+
+    public int numberOfProducts() {
+        return products.size();
+    }
+
+    public boolean isValidIndex(int index) {
+        return (index >= 0) && (index < products.size());
+    }
+
+    public Product deleteProduct(int indexToDelete) {
+        if (isValidIndex(indexToDelete)) {
+            return products.remove(indexToDelete);
+        }
+        return null;
+    }
 }
